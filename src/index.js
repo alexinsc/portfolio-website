@@ -1,10 +1,11 @@
-
-// src/index.js
-
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const port = 3000;
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -20,11 +21,6 @@ mongoose.connect('mongodb://localhost:27017/portfolio', {
 // Import portfolio routes
 const portfolioRouter = require('./routes/portfolio');
 app.use('/portfolio', portfolioRouter);
-
-// Simple route
-app.get('/', (req, res) => {
-  res.send("Welcome to Alexis's Portfolio Website!");
-});
 
 // Start the server
 app.listen(port, '0.0.0.0', () => {
